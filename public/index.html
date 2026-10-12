@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; object-src 'none'; base-uri 'none'; form-action 'self'" />
+    <title data-i18n="page.title">Agende seu horário</title>
+    <meta name="description" content="Escolha o serviço, o dia e o horário e agende online." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/base.css" />
+    <link rel="stylesheet" href="/assets/app.css" />
+    <script type="module" src="/assets/app.js"></script>
+  </head>
+  <body>
+    <div class="page-bg" aria-hidden="true"></div>
+    <header class="container site-header">
+      <p class="eyebrow" data-i18n="page.eyebrow"></p>
+      <h1 id="business-name"></h1>
+      <p id="business-description" class="lead"></p>
+    </header>
+
+    <main id="flow" class="container booking">
+      <section id="step-service" class="card step" aria-labelledby="step-service-title">
+        <h2 id="step-service-title" class="step-title"><span class="step-num" aria-hidden="true">1</span> <span data-i18n="step.service"></span></h2>
+        <div id="services" class="services"></div>
+        <p id="no-services" class="empty" hidden data-i18n="service.none"></p>
+      </section>
+
+      <div class="when">
+        <section id="step-day" class="card step" aria-labelledby="step-day-title" hidden>
+          <h2 id="step-day-title" class="step-title" tabindex="-1"><span class="step-num" aria-hidden="true">2</span> <span data-i18n="step.day"></span></h2>
+          <div class="calendar">
+            <div class="calendar-head">
+              <button id="prev-month" class="btn small ghost icon" type="button" data-i18n-label="calendar.previous">‹</button>
+              <h3 id="month-label" aria-live="polite"></h3>
+              <button id="next-month" class="btn small ghost icon" type="button" data-i18n-label="calendar.next">›</button>
+            </div>
+            <div id="weekdays" class="calendar-grid weekdays" aria-hidden="true"></div>
+            <div id="calendar" class="calendar-grid"></div>
+          </div>
+          <p id="no-days" class="empty" hidden data-i18n="day.none"></p>
+        </section>
+
+        <section id="step-time" class="card step" aria-labelledby="step-time-title" hidden>
+          <h2 id="step-time-title" class="step-title" tabindex="-1"><span class="step-num" aria-hidden="true">3</span> <span data-i18n="step.time"></span></h2>
+          <p id="time-day" class="muted"></p>
+          <div id="slots" class="slots"></div>
+          <p id="no-slots" class="empty" hidden data-i18n="time.none"></p>
+          <p id="tz-note" class="muted small" hidden></p>
+        </section>
+      </div>
+
+      <section id="step-details" class="card step" aria-labelledby="step-details-title" hidden>
+        <h2 id="step-details-title" class="step-title" tabindex="-1"><span class="step-num" aria-hidden="true">4</span> <span data-i18n="step.details"></span></h2>
+        <dl id="summary" class="summary"></dl>
+        <form id="booking-form" class="stack" novalidate>
+          <div class="form-grid">
+            <label class="field">
+              <span data-i18n="form.name"></span>
+              <input name="name" autocomplete="name" required minlength="2" maxlength="100" />
+            </label>
+            <label class="field">
+              <span data-i18n="form.email"></span>
+              <input name="email" type="email" autocomplete="email" required maxlength="254" />
+            </label>
+          </div>
+          <label class="field">
+            <span><span data-i18n="form.phone"></span> <span class="muted small">(<span data-i18n="form.optional"></span>)</span></span>
+            <input name="phone" type="tel" autocomplete="tel" maxlength="30" />
+          </label>
+          <label class="field">
+            <span><span data-i18n="form.note"></span> <span class="muted small">(<span data-i18n="form.optional"></span>)</span></span>
+            <textarea name="note" maxlength="1000" rows="3"></textarea>
+          </label>
+          <label class="honeypot" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+          <p id="error" class="alert error" role="alert" hidden></p>
+          <button class="btn primary block" type="submit" data-i18n="form.submit"></button>
+        </form>
+      </section>
+    </main>
+
+    <main id="done" class="container booking" hidden>
+      <section class="card done stack" aria-labelledby="done-title">
+        <div id="done-icon" class="done-icon" aria-hidden="true">✓</div>
+        <h2 id="done-title" tabindex="-1"></h2>
+        <p id="done-text" class="muted"></p>
+        <p class="code-box"><span class="muted small" data-i18n="done.code"></span> <strong id="done-code"></strong></p>
+        <dl id="done-summary" class="summary"></dl>
+        <div class="row done-actions">
+          <a id="add-calendar" class="btn primary" href="#" download data-i18n="done.calendar"></a>
+          <button id="book-again" class="btn" type="button" data-i18n="done.again"></button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
